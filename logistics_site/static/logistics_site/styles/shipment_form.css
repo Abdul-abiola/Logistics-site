@@ -1,0 +1,102 @@
+.form-wrap{
+  min-height: 70vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  background: var(--cream);
+  padding: 60px 20px;
+}
+
+.form-card{
+  background: var(--white);
+  padding: 48px 50px;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 20px 50px rgba(16,28,55,0.12);
+  border-radius: 4px;
+  animation: form-rise 0.5s ease-out;
+}
+
+@keyframes form-rise{
+  from{ opacity: 0; transform: translateY(24px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+.form-card .label{ display:block; margin-bottom:10px; }
+.form-card h2{ font-size: 1.7rem; margin-bottom: 30px; }
+
+/* Django's form.as_p wraps each field in <p> */
+.shipment-form p{
+  margin: 0 0 20px;
+  opacity: 0;
+  animation: field-fade 0.4s ease-out forwards;
+}
+
+/* stagger each field's entrance slightly */
+.shipment-form p:nth-of-type(1){ animation-delay: 0.05s; }
+.shipment-form p:nth-of-type(2){ animation-delay: 0.10s; }
+.shipment-form p:nth-of-type(3){ animation-delay: 0.15s; }
+.shipment-form p:nth-of-type(4){ animation-delay: 0.20s; }
+.shipment-form p:nth-of-type(5){ animation-delay: 0.25s; }
+.shipment-form p:nth-of-type(6){ animation-delay: 0.30s; }
+.shipment-form p:nth-of-type(7){ animation-delay: 0.35s; }
+.shipment-form p:nth-of-type(8){ animation-delay: 0.40s; }
+
+@keyframes field-fade{
+  from{ opacity: 0; transform: translateY(10px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+.shipment-form label{
+  display:block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  color:#333;
+  margin-bottom: 8px;
+}
+
+.shipment-form input,
+.shipment-form textarea{
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d8d0bb;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shipment-form textarea{
+  min-height: 90px;
+  resize: vertical;
+}
+
+.shipment-form input:focus,
+.shipment-form textarea:focus{
+  outline:none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(217,119,46,0.15);
+}
+
+.form-btn{
+  width:100%;
+  margin-top: 10px;
+  transition: transform 0.15s ease, background 0.2s ease;
+  cursor:pointer;
+}
+.form-btn:hover{ transform: translateY(-2px); }
+.form-btn:active{ transform: translateY(0); }
+
+@media (max-width: 900px){
+  .form-wrap{
+    padding: 30px 16px;
+  }
+
+  .form-card{
+    padding: 30px 22px;
+  }
+
+  .form-card h2{
+    font-size: 1.4rem;
+  }
+}

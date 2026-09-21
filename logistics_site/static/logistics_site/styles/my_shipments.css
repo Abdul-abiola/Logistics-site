@@ -1,0 +1,164 @@
+.shipments-hero{
+  background: var(--navy);
+  color: var(--white);
+  padding: 50px 60px;
+}
+.shipments-hero h1{
+  color: var(--white);
+  font-size: 2.1rem;
+  margin-bottom: 10px;
+}
+.shipments-hero p{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#b9bfcc;
+  margin:0;
+}
+
+.shipments-wrap{
+  background: var(--cream);
+  min-height: 60vh;
+  padding: 50px 60px;
+}
+
+.shipments-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 30px;
+}
+.shipments-head h2{ font-size: 1.6rem; }
+
+.shipments-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  max-width: 720px;
+}
+
+.shipment-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background: var(--white);
+  padding: 20px 26px;
+  text-decoration:none;
+  border-left: 4px solid var(--navy);
+  box-shadow: 0 4px 14px rgba(16,28,55,0.06);
+
+  opacity:0;
+  transform: translateY(12px);
+  animation: card-in 0.4s ease-out forwards;
+
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.shipments-list a:nth-child(1){ animation-delay: 0.05s; }
+.shipments-list a:nth-child(2){ animation-delay: 0.10s; }
+.shipments-list a:nth-child(3){ animation-delay: 0.15s; }
+.shipments-list a:nth-child(4){ animation-delay: 0.20s; }
+.shipments-list a:nth-child(5){ animation-delay: 0.25s; }
+.shipments-list a:nth-child(6){ animation-delay: 0.30s; }
+.shipments-list a:nth-child(7){ animation-delay: 0.35s; }
+.shipments-list a:nth-child(8){ animation-delay: 0.40s; }
+
+@keyframes card-in{
+  from{ opacity:0; transform: translateY(12px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.shipment-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(16,28,55,0.14);
+}
+
+.shipment-card-main{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.tracking-no{
+  font-family: 'Georgia', serif;
+  font-weight:700;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+.status-badge{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.75rem;
+  font-weight:700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+/* status colors — adjust the keys to match your Shipment.STATUS_CHOICES values */
+/* status colors — match Shipment.STATUS_CHOICES exactly */
+.status-badge.status-pending{ background:#fdf1e0; color:#b8611f; }
+.status-badge.status-picked_up{ background:#eef0fb; color:#3d3f9e; }
+.status-badge.status-in_transit{ background:#e6effc; color:#1a5fb4; }
+.status-badge.status-out_for_delivery{ background:#fdf6d9; color:#8a6d00; }
+.status-badge.status-delivered{ background:#e6f4ea; color:#1e7a34; }
+.status-badge.status-failed{ background:#fdecea; color:#b3261e; }
+.status-badge.status-cancelled{ background:#f1f1f1; color:#666; }
+
+.view-arrow{
+  color: var(--muted);
+  font-size:1.2rem;
+  transition: transform 0.18s ease;
+}
+.shipment-card:hover .view-arrow{
+  transform: translateX(4px);
+  color: var(--orange);
+}
+
+.empty-state{
+  background: var(--white);
+  padding: 40px;
+  text-align:center;
+}
+.empty-state p{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#666;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 900px){
+  .shipments-hero{
+    padding: 36px 20px;
+  }
+  .shipments-hero h1{
+    font-size: 1.6rem;
+  }
+
+  .shipments-wrap{
+    padding: 30px 16px;
+  }
+
+  .shipments-head{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .shipments-head .btn{
+    width: 100%;
+    text-align: center;
+  }
+
+  .shipment-card{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 20px;
+  }
+
+  .shipment-card-main{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .view-arrow{
+    align-self: flex-end;
+  }
+}

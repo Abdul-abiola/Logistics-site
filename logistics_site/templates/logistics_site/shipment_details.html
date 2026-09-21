@@ -1,0 +1,100 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/shipment_details.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="detail-hero status-{{ shipment.status }}">
+  <span class="label">SHIPMENT</span>
+  <h2>{{ shipment.tracking_number }}</h2>
+  <span class="status-badge status-{{ shipment.status }}">{{ shipment.get_status_display }}</span>
+</section>
+
+<section class="detail-wrap">
+  <div class="detail-card">
+    <div class="detail-row">
+      <span class="k">RECIPIENT</span>
+      <span class="v">{{ shipment.recipient_name }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="k">DELIVERY ADDRESS</span>
+      <span class="v">{{ shipment.recipient_address }}</span>
+    </div>
+  </div>
+
+  <div class="timeline-card">
+    <h3>Timeline</h3>
+    <ul class="timeline">
+      {% for event in events %}
+        <li class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <span class="timeline-status">{{ event.get_status_display }}</span>
+            <span class="timeline-time">{{ event.timestamp }}</span>
+            {% if event.location %}<p class="timeline-detail">to {{ event.location }}</p>{% endif %}
+            {% if event.note %}<p class="timeline-detail">{{ event.note }}</p>{% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="detail-actions">
+    {% if request.user == shipment.driver or request.user.role == 'admin' %}
+      <a href="{% url 'update-shipment-status' shipment.id %}" class="btn btn-primary">Update Status</a>
+    {% endif %}
+
+    {% if request.user == shipment.customer and shipment.status == 'pending' %}
+      <form method="post" action="{% url 'cancel-shipment' shipment.id %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline btn-danger">Cancel Shipment</button>
+      </form>
+
+      <a href="{% url 'edit-shipment' shipment.id %}" class="btn btn-outline">Edit Shipment</a>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
+
+
+
+
+{% comment %} {% extends 'main.html' %}
+{% block content %}
+  <h2>Tracking Number: {{ shipment.tracking_number }}</h2>
+  <p>Status: {{ shipment.get_status_display }}</p>
+  <p>To: {{ shipment.recipient_name }}, {{ shipment.recipient_address }}</p>
+
+  <h3>Timeline</h3>
+  <ul>
+    {% for event in events %}
+      <li>
+        {{ event.timestamp }} — {{ event.get_status_display }}
+        {% if event.location %} to  {{ event.location }}{% endif %}
+        {% if event.note %} ({{ event.note }}){% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if request.user == shipment.driver or request.user.role == 'admin' %}
+    <a href="{% url 'update-shipment-status' shipment.id %}">Update Status</a>
+  {% endif %}
+
+  {% if request.user == shipment.customer and shipment.status == 'pending' %}
+    <form method="post" action="{% url 'cancel-shipment' shipment.id %}">
+        {% csrf_token %}
+        <button type="submit">Cancel Shipment</button>
+    </form>
+  
+  {% if request.user == shipment.customer and shipment.status == 'pending' %}
+    <a href="{% url 'edit-shipment' shipment.id %}">Edit Shipment</a>
+  {% endif %}  
+    
+{% endif %}
+
+{% endblock %}
+ {% endcomment %}

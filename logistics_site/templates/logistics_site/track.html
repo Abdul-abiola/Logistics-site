@@ -1,0 +1,17 @@
+<form method="GET">
+  <input type="text" name="tracking_number" placeholder="Enter tracking number" value="{{ tracking_number|default:'' }}">
+  <button type="submit">Track</button>
+</form>
+
+{% if tracking_number %}
+  {% if shipment %}
+    <h3>Status: {{ shipment.get_status_display }}</h3>
+    <ul>
+      {% for event in shipment.events.all %}
+        <li>{{ event.timestamp }} — {{ event.get_status_display }} {% if event.location %}at {{ event.location }}{% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No shipment found with that tracking number.</p>
+  {% endif %}
+{% endif %} 

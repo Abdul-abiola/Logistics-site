@@ -1,0 +1,138 @@
+.deliveries-hero{
+  background: var(--navy);
+  color: var(--white);
+  padding: 50px 60px;
+}
+.deliveries-hero .label{ margin-bottom: 10px; }
+.deliveries-hero h2{ color: var(--white); font-size: 2rem; margin:0; }
+
+.deliveries-wrap{
+  background: var(--cream);
+  min-height: 60vh;
+  padding: 50px 60px;
+}
+
+.deliveries-list{
+  display:flex;
+  flex-direction:column;
+  gap: 14px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.delivery-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background: var(--white);
+  padding: 20px 26px;
+  text-decoration:none;
+  border-left: 4px solid var(--navy);
+  box-shadow: 0 4px 14px rgba(16,28,55,0.06);
+
+  opacity:0;
+  transform: translateY(12px);
+  animation: card-in 0.4s ease-out forwards;
+
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.deliveries-list a:nth-child(1){ animation-delay: 0.05s; }
+.deliveries-list a:nth-child(2){ animation-delay: 0.10s; }
+.deliveries-list a:nth-child(3){ animation-delay: 0.15s; }
+.deliveries-list a:nth-child(4){ animation-delay: 0.20s; }
+.deliveries-list a:nth-child(5){ animation-delay: 0.25s; }
+.deliveries-list a:nth-child(6){ animation-delay: 0.30s; }
+
+@keyframes card-in{
+  from{ opacity:0; transform: translateY(12px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.delivery-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(16,28,55,0.14);
+}
+
+.delivery-card-main{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.tracking-no{
+  font-family: 'Georgia', serif;
+  font-weight:700;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+.recipient{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#555;
+  font-size: 0.9rem;
+}
+
+.status-badge{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.75rem;
+  font-weight:700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+.status-badge.status-pending{ background:#fdf1e0; color:#b8611f; }
+.status-badge.status-picked_up{ background:#eef0fb; color:#3d3f9e; }
+.status-badge.status-in_transit{ background:#e6effc; color:#1a5fb4; }
+.status-badge.status-out_for_delivery{ background:#fdf6d9; color:#8a6d00; }
+.status-badge.status-delivered{ background:#e6f4ea; color:#1e7a34; }
+.status-badge.status-failed{ background:#fdecea; color:#b3261e; }
+.status-badge.status-cancelled{ background:#f1f1f1; color:#666; }
+
+.view-arrow{
+  color: var(--muted);
+  font-size:1.2rem;
+  transition: transform 0.18s ease;
+}
+.delivery-card:hover .view-arrow{
+  transform: translateX(4px);
+  color: var(--orange);
+}
+
+.empty-state{
+  background: var(--white);
+  padding: 40px;
+  text-align:center;
+  font-family: Arial, Helvetica, sans-serif;
+  color:#666;
+}
+
+@media (max-width: 900px){
+  .deliveries-hero{
+    padding: 36px 20px;
+  }
+  .deliveries-hero h2{
+    font-size: 1.6rem;
+  }
+
+  .deliveries-wrap{
+    padding: 30px 16px;
+  }
+
+  .delivery-card{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 20px;
+  }
+
+  .delivery-card-main{
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+
+  .view-arrow{
+    align-self: flex-end;
+  }
+}

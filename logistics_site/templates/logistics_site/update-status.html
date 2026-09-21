@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/update_status.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="status-hero">
+  <span class="label">DRIVER UPDATE</span>
+  <h2>Update Shipment Status</h2>
+  <p class="tracking-ref">{{ shipment.tracking_number }}</p>
+</section>
+
+<section class="status-wrap">
+  <div class="status-card">
+    <form method="POST" class="status-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary status-btn">Update Status</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}
+
+{% comment %} <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Status</button>
+</form> {% endcomment %}

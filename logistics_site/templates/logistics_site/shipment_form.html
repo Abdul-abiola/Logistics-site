@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/shipment_form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-wrap">
+  <div class="form-card">
+    <span class="label">NEW SHIPMENT</span>
+    <h2>Create a Shipment</h2>
+
+    <form method="POST" action="" class="shipment-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary form-btn">Create Shipment</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

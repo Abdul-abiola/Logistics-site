@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/driver_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="deliveries-hero">
+  <span class="label">DRIVER DASHBOARD</span>
+  <h2>My Deliveries</h2>
+</section>
+
+<section class="deliveries-wrap">
+  <div class="deliveries-list">
+    {% for shipment in shipments %}
+      <a href="{% url 'shipment-detail' shipment.id %}" class="delivery-card">
+        <div class="delivery-card-main">
+          <span class="tracking-no">{{ shipment.tracking_number }}</span>
+          <span class="recipient">{{ shipment.recipient_name }}</span>
+          <span class="status-badge status-{{ shipment.status }}">{{ shipment.get_status_display }}</span>
+        </div>
+        <span class="view-arrow">→</span>
+      </a>
+    {% empty %}
+      <div class="empty-state">
+        <p>No deliveries assigned to you yet.</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
+
+{% comment %} {% extends 'main.html' %}
+{% block content %}
+  <h2>My Deliveries</h2>
+
+  <ul>
+    {% for shipment in shipments %}
+      <li>
+        <a href="{% url 'shipment-detail' shipment.id %}">
+          {{ shipment.tracking_number }} — {{ shipment.recipient_name }} — {{ shipment.get_status_display }}
+        </a>
+      </li>
+    {% empty %}
+      <li>No deliveries assigned to you yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %} {% endcomment %}

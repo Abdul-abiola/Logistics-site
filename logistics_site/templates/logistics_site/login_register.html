@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/login_register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-wrap">
+  <div class="auth-card">
+
+    {% if page == 'login' %}
+      <span class="label">WELCOME BACK</span>
+      <h2>Login to your account</h2>
+
+      <form method="POST" action="" class="auth-form">
+        {% csrf_token %}
+
+        <div class="field">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter Your username" />
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter password" />
+        </div>
+
+        <input type="submit" value="Login" class="btn btn-primary auth-btn"/>
+      </form>
+
+      <p class="auth-footer">Haven't signed up yet? <a href="{% url 'register' %}">Sign up</a></p>
+
+    {% else %}
+      <span class="label">GET STARTED</span>
+      <h2>Create your account</h2>
+
+      <form method="POST" action="" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register" class="btn btn-primary auth-btn"/>
+      </form>
+
+      <p class="auth-footer">Already signed up? <a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+
+    {% for message in messages %}
+      <p class="auth-error">{{ message }}</p>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock content %}
+
+{% comment %} {% extends 'main.html' %}
+
+{% block content %}
+
+{% if page == 'login' %}
+<div>
+    <form method="POST" action="">
+       {% csrf_token %}
+        
+       <label>Username</label>
+       <input type="text" name="username" placeholder="Enter Your username" />
+
+       <label>Password</label>
+       <input type="password" name="password" placeholder="Enter password" />
+       
+       <input type="submit" value="Login"/>
+    </form>
+    <p>Haven't signed up yet?</p>
+    <a href="{% url 'register' %}" class="btn">Sign up</a>
+</div>
+
+{% else %}
+
+<div>
+    <form method="POST" action="">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <input type="submit" value="Register" class="btn"/>
+    </form>
+    <p>Already  signed up?</p>
+    <a href="{% url 'login' %}" class="btn">Login</a>
+</div>
+{% endif %}
+
+{% for message in messages %}
+    <p style="color:red;">{{ message }}</p>
+{% endfor %}
+
+{% endblock content  %} {% endcomment %}

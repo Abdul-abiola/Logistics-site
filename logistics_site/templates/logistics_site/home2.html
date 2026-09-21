@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyramid — Nigeria's Trusted Logistics Partner</title>
+<style>
+  :root{
+    --navy: #101c37;
+    --navy-2: #16213f;
+    --cream: #f3eee2;
+    --cream-2: #ece5d4;
+    --orange: #d9772e;
+    --orange-dark: #b8611f;
+    --ink: #1b1b1b;
+    --muted: #6b6f76;
+    --white: #ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height:1.5;
+  }
+  h1,h2,h3,h4{
+    font-family: 'Georgia', 'Times New Roman', serif;
+    margin:0;
+    color: var(--navy);
+  }
+  a{color:inherit; text-decoration:none;}
+  .label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--orange);
+    font-weight:700;
+  }
+  .btn{
+    display:inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding: 14px 28px;
+    border-radius:2px;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{ background: var(--navy); color:var(--white); }
+  .btn-primary:hover{ background:#0a1226; }
+  .btn-outline{ background:transparent; border-color:var(--navy); color:var(--navy); }
+  .btn-outline:hover{ background: rgba(16,28,55,0.06); }
+
+  /* NAV */
+  header.nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 60px;
+    border-bottom: 1px solid #eee;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .brand{ display:flex; align-items:baseline; gap:8px; }
+  .brand h1{ font-size:1.5rem; letter-spacing:-0.02em; }
+  .brand .est{ font-size:0.7rem; color: var(--orange); letter-spacing:0.08em; }
+  nav.links{ display:flex; align-items:center; gap:32px; font-size:0.95rem; color:#333; }
+  nav.links a:hover{ color: var(--orange); }
+
+  /* HERO */
+  .ticker{
+    background: var(--orange);
+    color:var(--navy);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:0.85rem;
+    font-weight:700;
+    padding:10px 0;
+    white-space:nowrap;
+    overflow:hidden;
+    position:relative;
+  }
+  .ticker-track{
+    display:inline-flex;
+    animation: ticker-scroll 22s linear infinite;
+    will-change: transform;
+  }
+  .ticker-track .seg-group{
+    display:inline-flex;
+  }
+  .ticker-track span.seg{
+    display:inline-flex;
+    align-items:center;
+    padding-right:48px;
+    padding-left: 24px;
+  }
+  .ticker-track span.seg .dot-sep{
+    margin: 0 10px;
+  }
+  @keyframes ticker-scroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{ animation: none; }
+  }
+  .hero{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+  }
+  .hero-left{ padding: 60px; display:flex; flex-direction:column; justify-content:center; }
+  .hero-left .label{ margin-bottom:14px; }
+  .hero-left h2{
+    font-size: 3.2rem;
+    line-height:1.08;
+    margin-bottom:20px;
+  }
+  .hero-left h2 .accent{ color: var(--orange); font-style:italic; }
+  .hero-left p.lede{ font-size:1.05rem; color:#4a4a4a; max-width:46ch; margin-bottom:28px; font-family: Arial, Helvetica, sans-serif;}
+  .hero-actions{ display:flex; gap:14px; margin-bottom:36px; }
+  .hero-image{ position:relative; }
+  .hero-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-stat-card{
+    position:absolute; bottom:24px; left:24px;
+    background:var(--white);
+    padding:20px 26px;
+    display:flex; gap:32px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .hero-stat-card .num{ font-size:1.6rem; font-weight:700; color:var(--navy); }
+  .hero-stat-card .cap{ font-size:0.75rem; color:var(--muted); }
+
+  .info-strip{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .info-strip .field{ padding: 26px 40px; border-right:1px solid #e4ddcb; background:var(--cream); }
+  .info-strip .field:last-child{ border-right:none; }
+  .info-strip .field .label{ display:block; margin-bottom:8px; font-size:0.7rem; color:var(--orange); }
+  .info-strip .field .value{ font-family: Arial, Helvetica, sans-serif; font-size:1rem; color:var(--navy); }
+
+  /* TRACKING BAR */
+  .track-bar{
+    background: var(--cream);
+    padding: 20px 60px;
+    display:flex; align-items:center; gap:20px;
+    border-bottom:1px solid #e4ddcb;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .track-bar .live{ display:flex; align-items:center; gap:8px; font-size:0.75rem; letter-spacing:0.1em; color:var(--orange); font-weight:700; white-space:nowrap;}
+  .live .dot{ width:8px; height:8px; border-radius:50%; background:var(--orange); }
+  .track-bar input{
+    flex:1; padding:12px 16px; border:1px solid #d8d0bb; font-family:inherit; font-size:0.95rem;
+  }
+  .track-bar button{ font-family: Arial, Helvetica, sans-serif; }
+
+  /* STATS */
+  .stats{
+    background: var(--navy);
+    display:grid; grid-template-columns: repeat(4,1fr);
+    padding: 44px 60px;
+  }
+  .stats .stat{ text-align:left; border-right:1px solid rgba(255,255,255,0.12); padding-right:24px; }
+  .stats .stat:last-child{ border-right:none; }
+  .stats .num{ color:var(--white); font-size:2.4rem; font-weight:700; }
+  .stats .cap{ color:var(--orange); font-family: Arial, Helvetica, sans-serif; font-size:0.85rem; font-weight:700; margin-top:6px; }
+  .stats .sub{ color:#aeb4c2; font-family: Arial, Helvetica, sans-serif; font-size:0.78rem; margin-top:4px; }
+
+  /* LOGOS */
+  .logos{
+    background: var(--cream);
+    text-align:center;
+    padding: 60px;
+  }
+  .logos .label{ display:block; margin-bottom:36px; letter-spacing:0.15em; }
+  .logo-row{ display:flex; justify-content:center; gap:60px; flex-wrap:wrap; }
+  .logo-row span{ font-size:1.2rem; font-weight:700; color:#b9b2a0; letter-spacing:0.02em; }
+
+  /* SERVICES */
+  .services{
+    display:grid; grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+    padding: 70px 60px;
+    gap:60px;
+  }
+  .services-left h2{ font-size:2.6rem; line-height:1.1; margin: 18px 0 20px; }
+  .services-left p{ font-family: Arial, Helvetica, sans-serif; color:#4a4a4a; margin-bottom:30px; max-width:42ch; }
+  .services-left img{ width:100%; border-radius:2px; display:block; }
+  .rule{ width:36px; height:2px; background:var(--orange); display:inline-block; margin-right:10px; vertical-align:middle;}
+
+  .accordion .item{ border-top:1px solid #ded6c2; padding: 22px 0; }
+  .accordion .item:last-child{ border-bottom:1px solid #ded6c2; }
+  .item-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; cursor:pointer; }
+  .item-head .roman{ font-family: Arial, Helvetica, sans-serif; color:var(--orange); font-size:0.85rem; margin-bottom:6px; display:block; }
+  .item-head h4{ font-size:1.3rem; margin-bottom:4px; }
+  .item-head .sub{ font-family: Arial, Helvetica, sans-serif; color:var(--muted); font-size:0.85rem; }
+  .item-head .toggle{
+    flex-shrink:0; width:34px; height:34px; border:1px solid #ccc3ab;
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem; color:var(--navy);
+  }
+  .item-body{ font-family: Arial, Helvetica, sans-serif; color:#4a4a4a; margin-top:14px; max-width:52ch; font-size:0.95rem; }
+
+  /* TESTIMONIALS */
+  .testimonials{ background: var(--navy); padding: 70px 60px; }
+  .testimonials .label{ margin-bottom:20px; }
+  .testimonials .rule{ background:var(--orange); }
+  .t-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px; }
+  .t-card{ background: var(--navy-2); padding:34px; }
+  .t-card p{ font-style:italic; color:#e8e6df; font-size:1.05rem; line-height:1.6; margin-bottom:24px; }
+  .t-person{ display:flex; align-items:center; gap:14px; }
+  .t-avatar{ width:40px; height:40px; background:var(--orange); color:var(--navy); font-family:Arial, sans-serif; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .t-name{ font-family: Arial, Helvetica, sans-serif; color:var(--white); font-weight:700; font-size:0.9rem; }
+  .t-role{ font-family: Arial, Helvetica, sans-serif; color:#9aa0ac; font-size:0.82rem; }
+
+  /* QUOTE / FOUNDER */
+  .founder-quote{
+    position:relative;
+    background: linear-gradient(rgba(10,16,32,0.55), rgba(10,16,32,0.65)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=60') center/cover;
+    padding: 110px 60px;
+    text-align:center;
+  }
+  .founder-quote p{
+    font-style:italic; color:var(--white); font-size:1.9rem; line-height:1.4; max-width:900px; margin:0 auto 26px;
+  }
+  .founder-quote .attribution{ font-family: Arial, Helvetica, sans-serif; color:var(--orange); font-size:0.85rem; letter-spacing:0.06em; }
+
+  /* WORK WITH US / ENQUIRY */
+  .enquiry{
+    display:grid; grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+    padding: 70px 60px;
+    gap:60px;
+  }
+  .enquiry-left h2{ font-size:2.6rem; line-height:1.1; margin:18px 0 18px; }
+  .enquiry-left h2 .accent{ color:var(--orange); font-style:italic; }
+  .enquiry-left p.lede{ font-family: Arial, Helvetica, sans-serif; color:#4a4a4a; max-width:44ch; margin-bottom:30px; }
+  .contact-row{ display:flex; justify-content:space-between; padding:16px 0; border-top:1px solid #ded6c2; font-family: Arial, Helvetica, sans-serif;}
+  .contact-row:last-child{ border-bottom:1px solid #ded6c2; }
+  .contact-row .k{ font-size:0.7rem; color:var(--orange); letter-spacing:0.1em; }
+  .contact-row .v{ color:var(--navy); }
+  .contact-row .v a{ color:#1a5fb4; }
+
+  form.quote-form{ display:flex; flex-direction:column; gap:22px; font-family: Arial, Helvetica, sans-serif; }
+  form.quote-form label{ font-size:0.9rem; color:#333; display:block; margin-bottom:8px; }
+  form.quote-form input, form.quote-form textarea{
+    width:100%; padding:14px 16px; border:1px solid #d8d0bb; font-family:inherit; font-size:0.95rem; background:var(--white);
+  }
+  form.quote-form textarea{ resize:vertical; min-height:90px; }
+  form.quote-form button{ margin-top:6px; }
+
+  /* FOOTER */
+  footer{ background: var(--navy); color:#c7cbd4; padding: 70px 60px 30px; }
+  .footer-grid{ display:grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,0.12);}
+  .footer-brand h3{ color:var(--white); font-size:1.5rem; margin-bottom:16px; }
+  .footer-brand p{ font-family: Arial, Helvetica, sans-serif; font-size:0.9rem; max-width:32ch; color:#a9aeb9; }
+  footer .col-label{ font-family: Arial, Helvetica, sans-serif; font-size:0.72rem; letter-spacing:0.1em; color:var(--orange); margin-bottom:18px; display:block; }
+  footer ul{ list-style:none; padding:0; margin:0; font-family: Arial, Helvetica, sans-serif; font-size:0.9rem; }
+  footer ul li{ margin-bottom:12px; }
+  footer ul li a:hover{ color:var(--white); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:26px;
+    font-family: Arial, Helvetica, sans-serif; font-size:0.78rem; color:#8c92a0; flex-wrap:wrap; gap:10px;
+  }
+  .footer-bottom .legal-links{ display:flex; gap:24px; }
+  .footer-bottom .legal-links a:hover{ color:var(--white); }
+
+  @media (max-width: 900px){
+    header.nav, .track-bar, .stats, .services, .enquiry, .footer-grid{ padding-left:24px; padding-right:24px; }
+    .hero, .services, .enquiry, .t-grid, .stats, .footer-grid{ grid-template-columns: 1fr; }
+    nav.links{ display:none; }
+    .hero-left h2, .services-left h2, .enquiry-left h2{ font-size:2.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="brand">
+    <h1>Pyramid</h1>
+    <span class="est">EST. 2008</span>
+  </div>
+  <nav class="links">
+    <a href="#services">Services</a>
+    <a href="#network">Network</a>
+    <a href="#tracking">Tracking</a>
+    <a href="#about">About</a>
+    <a href="#careers">Careers</a>
+  </nav>
+  <a href="#quote" class="btn btn-primary">Request Quote</a>
+</header>
+
+<div class="ticker" id="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="seg-group">
+      <span class="seg">LAGOS → ABUJA <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 6-8 HRS</span>
+      <span class="seg">BENIN CITY → WARRI <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 1-2 HRS</span>
+      <span class="seg">KANO → PORT HARCOURT <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 3-4 HRS</span>
+      <span class="seg">LAGOS → KANO <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 14-16 HRS</span>
+      <span class="seg">ABUJA → ONITSHA <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 5-6 HRS</span>
+    </span>
+    <span class="seg-group" aria-hidden="true">
+      <span class="seg">LAGOS → ABUJA <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 6-8 HRS</span>
+      <span class="seg">BENIN CITY → WARRI <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 1-2 HRS</span>
+      <span class="seg">KANO → PORT HARCOURT <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 3-4 HRS</span>
+      <span class="seg">LAGOS → KANO <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 14-16 HRS</span>
+      <span class="seg">ABUJA → ONITSHA <span class="dot-sep">·</span> ROAD <span class="dot-sep">·</span> 5-6 HRS</span>
+    </span>
+  </div>
+</div>
+
+<section class="track-bar">
+  <span class="live"><span class="dot"></span>LIVE TRACKING</span>
+  <input type="text" placeholder="Enter tracking reference — e.g. PYR-20260907-4812">
+  <button class="btn btn-primary">Track</button>
+</section>
+
+<section class="hero">
+  <div class="hero-left">
+    <span class="label">NIGERIA'S TRUSTED LOGISTICS PARTNER</span>
+    <h2>Delivering across every <span class="accent">Nigerian state.</span></h2>
+    <p class="lede">Pyramid moves goods reliably from Lagos to Maiduguri, Sokoto to Calabar — 36 states, one dependable network.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn btn-primary">Explore services</a>
+      <a href="#quote" class="btn btn-outline">Get a quote</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=70" alt="Warehouse with stacked packages">
+    <div class="hero-stat-card">
+      <div><div class="num">36</div><div class="cap">States covered</div></div>
+      <div><div class="num">98.4%</div><div class="cap">On-time rate</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="num">36</div><div class="cap">States covered</div><div class="sub">including FCT Abuja</div></div>
+  <div class="stat"><div class="num">98.4%</div><div class="cap">On-time rate</div><div class="sub">12-month rolling average</div></div>
+  <div class="stat"><div class="num">820K</div><div class="cap">Deliveries/year</div><div class="sub">across all corridors</div></div>
+  <div class="stat"><div class="num">2008</div><div class="cap">Founded</div><div class="sub">Lagos Island, Nigeria</div></div>
+</section>
+
+<section class="logos">
+  <span class="label">TRUSTED BY NIGERIAN BUSINESSES</span>
+  <div class="logo-row">
+    <span>DANGOTE</span><span>MTN NIGERIA</span><span>JUMIA</span><span>SHOPRITE NG</span><span>FLOUR MILLS</span><span>INDOMIE</span>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-left">
+    <span class="label"><span class="rule"></span>OUR SERVICES</span>
+    <h2>Every route.<br>Every state.</h2>
+    <p>From Apapa port to Borno State, our in-house fleet and vetted partners cover every Nigerian corridor with no middlemen.</p>
+    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=900&q=70" alt="Haulage truck on the highway">
+  </div>
+  <div class="accordion">
+    <div class="item">
+      <div class="item-head">
+        <div>
+          <span class="roman">(I)</span>
+          <h4>Intercity Haulage</h4>
+          <span class="sub">Lagos · Abuja · Kano · PH</span>
+        </div>
+        <div class="toggle">−</div>
+      </div>
+      <div class="item-body">Heavy-duty truck haulage connecting all 36 states. Fixed departure schedules from Lagos, Abuja, Kano, and Port Harcourt depots — six days a week.</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div>
+          <span class="roman">(II)</span>
+          <h4>Express Delivery</h4>
+          <span class="sub">Same-day &amp; next-day</span>
+        </div>
+        <div class="toggle">+</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div>
+          <span class="roman">(III)</span>
+          <h4>Warehousing &amp; Storage</h4>
+          <span class="sub">Lagos · Kano · Onitsha</span>
+        </div>
+        <div class="toggle">+</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div>
+          <span class="roman">(IV)</span>
+          <h4>E-Commerce Fulfilment</h4>
+          <span class="sub">For online sellers &amp; SMEs</span>
+        </div>
+        <div class="toggle">+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <span class="label"><span class="rule"></span>CLIENT VOICES</span>
+  <div class="t-grid">
+    <div class="t-card">
+      <p>"Pyramid moved our Kano textile stock to Lagos in record time. No damage, no delays — exactly what we needed for our Q4 push."</p>
+      <div class="t-person">
+        <div class="t-avatar">A</div>
+        <div>
+          <div class="t-name">Aisha Musa</div>
+          <div class="t-role">Operations Manager, Kano Fabrics Ltd</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card">
+      <p>"Our Jumia fulfilment has never been smoother. The real-time tracking means our customers always know where their orders are."</p>
+      <div class="t-person">
+        <div class="t-avatar">E</div>
+        <div>
+          <div class="t-name">Emeka Okafor</div>
+          <div class="t-role">Founder, ShopNaija.ng</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder-quote">
+  <p>"Nigeria moves when its supply chains move. We built Pyramid to make sure that never stops."</p>
+  <div class="attribution">— CHUKWUEMEKA NWOSU, FOUNDER &amp; CEO</div>
+</section>
+
+<section class="enquiry" id="quote">
+  <div class="enquiry-left">
+    <span class="label"><span class="rule"></span>WORK WITH US</span>
+    <h2>Let's move <span class="accent">your goods</span> across Nigeria.</h2>
+    <p class="lede">Whether you're sending one carton or a full truckload, our team is ready to quote and dispatch within the hour.</p>
+
+    <div class="contact-row">
+      <span class="k">HEAD OFFICE</span>
+      <span class="v">14 Creek Road, Apapa, Lagos State</span>
+    </div>
+    <div class="contact-row">
+      <span class="k">PHONE</span>
+      <span class="v">+234 801 234 5678</span>
+    </div>
+    <div class="contact-row">
+      <span class="k">EMAIL</span>
+      <span class="v"><a href="mailto:hello@pyramid.ng">hello@pyramid.ng</a></span>
+    </div>
+  </div>
+
+  <form class="quote-form">
+    <div>
+      <label>Company or business name</label>
+      <input type="text" placeholder="e.g. Eze Trading Co.">
+    </div>
+    <div>
+      <label>Your email</label>
+      <input type="email" placeholder="name@company.com">
+    </div>
+    <div>
+      <label>Pickup state</label>
+      <input type="text" placeholder="e.g. Lagos, Kano, Rivers...">
+    </div>
+    <div>
+      <label>What are you shipping?</label>
+      <textarea placeholder="Describe your cargo — type, weight, destination state, urgency..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send enquiry</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Pyramid</h3>
+      <p>Nigeria's most reliable domestic logistics and haulage network, connecting all 36 states since 2008.</p>
+    </div>
+    <div>
+      <span class="col-label">SERVICES</span>
+      <ul>
+        <li><a href="#">Intercity Haulage</a></li>
+        <li><a href="#">Express Delivery</a></li>
+        <li><a href="#">Warehousing</a></li>
+        <li><a href="#">E-Commerce Fulfilment</a></li>
+        <li><a href="#">Cold Chain</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="col-label">COMPANY</span>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="col-label">SUPPORT</span>
+      <ul>
+        <li><a href="#">Track Shipment</a></li>
+        <li><a href="#">Get a Quote</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Our Depots</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TRANSNILE LOGISTICS LTD · RC 1234567 · LAGOS, NIGERIA</span>
+    <div class="legal-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Preferences</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // accordion toggle
+  document.querySelectorAll('.accordion .item-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.parentElement;
+      const body = item.querySelector('.item-body');
+      const toggle = head.querySelector('.toggle');
+      const isOpen = !!body;
+      document.querySelectorAll('.accordion .item').forEach(i => {
+        const b = i.querySelector('.item-body');
+        if (b) b.remove();
+        i.querySelector('.toggle').textContent = '+';
+      });
+      if (!isOpen) {
+        const texts = {
+          'Intercity Haulage': 'Heavy-duty truck haulage connecting all 36 states. Fixed departure schedules from Lagos, Abuja, Kano, and Port Harcourt depots — six days a week.',
+          'Express Delivery': 'Same-day and next-day delivery within major metro corridors, with live tracking from pickup to drop-off.',
+          'Warehousing & Storage': 'Secure, monitored storage across Lagos, Kano, and Onitsha depots, with flexible short and long-term terms.',
+          'E-Commerce Fulfilment': 'Pick, pack, and dispatch for online sellers and SMEs, integrated with the platforms you already sell on.'
+        };
+        const title = item.querySelector('h4').textContent;
+        const newBody = document.createElement('div');
+        newBody.className = 'item-body';
+        newBody.textContent = texts[title] || '';
+        item.appendChild(newBody);
+        toggle.textContent = '−';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

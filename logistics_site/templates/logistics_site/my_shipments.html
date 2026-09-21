@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/my_shipments.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="shipments-hero">
+  <h1>Welcome to Pyramid Logistics</h1>
+  <p>Modern logistics transportation.</p>
+</section>
+
+<section class="shipments-wrap">
+  <div class="shipments-head">
+    <h2>My Shipments</h2>
+    <a href="{% url 'create-shipment' %}" class="btn btn-primary">+ New Shipment</a>
+  </div>
+
+  <div class="shipments-list">
+    {% for shipment in shipments %}
+      <a href="{% url 'shipment-detail' shipment.id %}" class="shipment-card status-{{ shipment.status }}">
+        <div class="shipment-card-main">
+          <span class="tracking-no">{{ shipment.tracking_number }}</span>
+          <span class="status-badge status-{{ shipment.status }}">{{ shipment.get_status_display }}</span>
+        </div>
+        <span class="view-arrow">→</span>
+      </a>
+    {% empty %}
+      <div class="empty-state">
+        <p>No shipments found.</p>
+        <a href="{% url 'create-shipment' %}" class="btn btn-outline">Create your first shipment</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
+
+{% comment %} {% extends 'main.html' %}
+{% block content %}
+<h1>Welcome to the Pyramid Logistics </h1>
+<p>Modern logistics transportation.</p> 
+  <h2>My Shipments</h2>
+  <a href="{% url 'create-shipment' %}">+ New Shipment</a>
+
+  <ul>
+    {% for shipment in shipments %}
+      <li>
+        <a href="{% url 'shipment-detail' shipment.id %}">
+          {{ shipment.tracking_number }} — {{ shipment.get_status_display }}
+        </a>
+      </li>
+    {% empty %}
+      <li>No shipments found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %} {% endcomment %}

@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'logistics_site/styles/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="logistics-hero">
+  <span class="label">LIVE TRACKING</span>
+  <h2>Logistics Information</h2>
+</section>
+
+<section class="logistics-wrap">
+  <div class="logistics-list">
+    {% for item in logistics %}
+  <div class="logistics-card status-{{ item.status }}">
+    <div class="logistics-card-head">
+      <span class="tracking-no">{{ item.tracking_number }}</span>
+      <span class="status-badge status-{{ item.status }}">{{ item.get_status_display }}</span>
+    </div>
+    <div class="logistics-card-body">
+      <div class="info-row">
+        <span class="k">DRIVER</span>
+        <span class="v">{{ item.driver.username|default:"Not yet assigned" }}</span>
+      </div>
+      <div class="info-row">
+        <span class="k">LOCATION</span>
+        <span class="v">{{ item.location|default:"—" }}</span>
+      </div>
+    </div>
+  </div>
+{% empty %}
+  <div class="empty-state">
+    <p>No logistics records found.</p>
+  </div>
+{% endfor %}
+  </div>
+</section>
+
+{% endblock content %}
+
+
+{% comment %} {% extends 'main.html'%}
+
+{% block content %}
+
+<div>
+    <h2>Logistics Information</h2>
+    <ul>
+        {% for item in logistics %}
+        <div style="margin-bottom: 25px;">
+            <li>
+                <strong>Driver Name:</strong> {{ item.driver }}<br>
+                <strong>Status:</strong> {{ item.status }}<br>
+                <strong>Driver Location:</strong> {{ item.location }}<br>
+                <strong>Tracking_number:</strong> {{ item.tracking_number }}<br>
+            </li>
+        </div>  
+    </ul>     
+</div>         
+        {% endfor %}     
+
+
+{% endblock content %}         {% endcomment %}
